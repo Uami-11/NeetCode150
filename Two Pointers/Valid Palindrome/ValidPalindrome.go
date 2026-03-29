@@ -1,27 +1,26 @@
 package main
 
 import (
-	"strings"
 	"unicode"
 )
 
 func isPalindrome(s string) bool {
-	str := strings.ToUpper(s)
-	pointer := 1
-	for i := 0; i < len(str)/2; {
-		end := len(str) - pointer
-		if str[i] != str[end] {
-			if !unicode.IsDigit(rune(str[i])) && !unicode.IsLetter(rune(str[i])) {
-				i++
-			} else if !unicode.IsDigit(rune(end)) && !unicode.IsLetter(rune(str[end])) {
-				pointer++
-			} else {
-				return false
-			}
-		} else {
-			i++
-			pointer++
+	left, right := 0, len(s)-1
+
+	for left < right {
+		for left < right && (!unicode.IsDigit(rune(s[left])) && !unicode.IsLetter(rune(s[left]))) {
+			left++
 		}
+		for left < right && (!unicode.IsDigit(rune(s[right])) && !unicode.IsLetter(rune(s[right]))) {
+			right--
+		}
+		if unicode.ToUpper(rune(s[left])) != unicode.ToUpper(rune(s[right])) {
+			return false
+		}
+
+		left++
+		right--
 	}
+
 	return true
 }

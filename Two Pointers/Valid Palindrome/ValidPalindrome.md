@@ -11,14 +11,28 @@ So a normal way to check if a string is palindrome or not, not caring to ignore 
 
 A similar concept can be used here, but instead of looping through it like normal, we have to ignore characters that are not alphanumeric. This can be done by adding an index for the latter half of the string as well, not just the first. So we have the first half looping until the half of the string, and the latter half following suit. Then we increment both pointers if the character they are pointing at are the same. But if they arent we have to check if one of the characters is a special character. If it is then we move the pointer thats pointing to it to the next step so that it points to the next character. And in the next loop we can compare that new character and the old normal character (if it wasnt normal then that pointer also shifts). But if all the characters are normal then that just means the string is not a palindrome
 
+## The revamp
+
+My previous solution did pass all of NeetCode's test, but in LeetCode it was a different story. I realized I did not cover many edge cases and in the end when all my code worked, it was a mess of if statements.
+
+So then I decided to learn what real two pointers is. Where we have a left and right, which increments and decrements through the string respectively. And though that thought came to mind I did not implement it so what does that matter.
+
+Then if the left pointer is pointing to a special character then we make it loop forward until it isnt
+
+The same with the right and we make it loop backwards.
+
+Then we check if the characters is not equal and since we know they are not special characters then we can just return false. Then if it isnt then we just move the pointers along
+
+It's so much simpler it's embarassing. I need to check for all my solution's LeetCode submissions from now
+
 ## Time & Space Complexity
 
 Time Complexity:
-- The function iterates through approximately half of the string (len(str)/2).
-- Each iteration involves constant-time operations: character comparisons, checks for digits or letters, and index updates.
-- Therefore, the overall time complexity is O(n), where n is the length of the input string.
+- The function uses two pointers, left and right, which traverse the string from both ends towards the center.
+- Each character is visited at most once by either pointer, and the inner while loops skip non-alphanumeric characters efficiently.
+- Therefore, the overall time complexity is O(n), where n is the length of the string, since each character is processed at most once.
 
 Space Complexity:
-- The function creates a new string 'str' which is a uppercase version of the input string, requiring O(n) space.
-- Other variables (pointers, indices) use constant space.
-- Hence, total space complexity is O(n).
+- The function uses a constant amount of extra space for variables left, right, and temporary variables within the loops.
+- No additional data structures proportional to the input size are used.
+- Hence, the space complexity is O(1).
