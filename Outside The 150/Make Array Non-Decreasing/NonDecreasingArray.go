@@ -1,13 +1,15 @@
 package main
 
 func maximumPossibleSize(nums []int) int {
-	var stack []int
+	top := -1
+	length := 0
 
 	for _, num := range nums {
-		if len(stack) == 0 || stack[len(stack)-1] <= num {
-			stack = append(stack, num)
+		if top <= num {
+			length++
+			top = num
 		}
 	}
 
-	return len(stack)
+	return length
 }
